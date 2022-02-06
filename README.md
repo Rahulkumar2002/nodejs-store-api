@@ -73,7 +73,8 @@
 <li>By default products will be sorted in the created order</li>
 <li>"localhost:8080/api/v1/products?x={value}" with a get request.</li>
 <li>If you want to sort the products using any key : "localhost:8080/api/v1/products?sort={key}"</li>
-<!--<li>To filter the product using price and ratings use : "?numericFilters=price</li>-->
+<li>If you want to change the page and to set limit to no. of products which can be shown on a singel page : "localhost:8080/api/v1/products?page={value}" & "localhost:8080/api/v1/products?limit={value}"</li>
+<li>To filter the product using price and ratings use : "?numericFilters=price>80" or "?numericFilters=rating>4"</li>
 </ul>
 
 
