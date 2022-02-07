@@ -1,10 +1,5 @@
 const Product = require("../models/product")
 
-const getProductsStatic = async (req, res) => {
-    const products = await Product.find({}).sort('price')
-    res.status(200).json({ products, nbHits: products.length })
-}
-
 const getProduct = async (req, res) => {
     const { featured, name, company, sort, fields, numericFilters } = req.query
     const queryObject = {}
@@ -15,9 +10,6 @@ const getProduct = async (req, res) => {
     if (name) {
         queryObject.name = { $regex: name, $options: 'i' }
     }
-    // if (rating) {
-    //     queryObject.rating = rating
-    // }
     if (company) {
         queryObject.company = company
     }
@@ -63,4 +55,46 @@ const getProduct = async (req, res) => {
     res.status(200).json({ products, nbHits: products.length })
 }
 
-module.exports = { getProductsStatic, getProduct }
+const updateProduct = async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+        res.status(404).json({ "msg": `Product not found ... check if your id:${req.params.id} is correct.` })
+    } else {
+        const updateProduct = await Product.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+        })
+        res.status(200).json({ "Product Updated:": updateProduct })
+    }
+}
+const deleteProduct = async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+        res.status(404).json({ "msg": `Product not found ... check if your id:${req.params.id} is correct.` })
+    }
+    await Product.findByIdAndDelete(req.params.id)
+    res.status(200).json({ "msg": "Product deleted succesfully...." })
+
+}
+const getProductById = async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+        res.status(404).json({ "msg": "Product Not found....try again later." })
+    }
+    res.status(200).json({ "product": product })
+}
+const createProduct = async (req, res) => {
+    const { name, featured, rating, price, company } = req.body
+    const product = new Product({
+        name: name,
+        featured: featured,
+        rating: rating,
+        price: price,
+        company: company
+    })
+    const savedProduct = await product.save()
+    res.status(201).json({ "product": savedProduct })
+
+}
+
+
+module.exports = { getProduct, createProduct, getProductById, deleteProduct, updateProduct }

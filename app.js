@@ -13,16 +13,12 @@ const port = 8080 || process.env.port
 
 dotenv.config()
 
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
-
-app.use("/api/v1/products", productsRoutes)
 
 //Middleware
 app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
+app.use("/api/v1/products", productsRoutes)
 app.use(notFound)
 app.use(errorHandlerMiddleware)
 
