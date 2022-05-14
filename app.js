@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 app.use("/api/v1/products", productsRoutes);
-app.use("/" , swaggerUiExpress.serve , swaggerUiExpress.setup(swaggerDocs)) ; 
+app.use("/api-docs" , swaggerUiExpress.serve , swaggerUiExpress.setup(swaggerDocs)) ; 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
 
