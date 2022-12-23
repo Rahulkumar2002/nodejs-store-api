@@ -11,7 +11,7 @@ const productsRoutes = require("./routes/products");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUiExpress = require("swagger-ui-express");
 const app = express();
-const port = 8080 || process.env.port;
+const port = 8080 || process.env.PORT;
 dotenv.config();
 
 const swaggerOptions = {
