@@ -1,4 +1,4 @@
-# [nodejs-store-api](https://storeapinodejs.herokuapp.com/#/)
+# [nodejs-store-api](https://store-managemenet-api.onrender.com/api-docs/)
 
 ## To run this project in your system : 
 <ul>
